@@ -59,11 +59,17 @@
             <call method="setSourceLanguage">
                 <argument>%jms_translation.source_language%</argument>
             </call>
+            <call method="setAddDate">
+                <argument>%jms_translation.add_date%</argument>
+            </call>
             <tag name="jms_translation.dumper" format="xliff" />
         </service>
         <service id="jms_translation.dumper.xlf_dumper" class="%jms_translation.dumper.xliff_dumper.class%" public="false">
             <call method="setSourceLanguage">
                 <argument>%jms_translation.source_language%</argument>
+            </call>
+            <call method="setAddDate">
+                <argument>%jms_translation.add_date%</argument>
             </call>
             <tag name="jms_translation.dumper" format="xlf" />
         </service>

@@ -33,6 +33,7 @@ class JMSTranslationExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
+        $container->setParameter('jms_translation.add_date', $config['add_date']);
         $container->setParameter('jms_translation.source_language', $config['source_language']);
         $container->setParameter('jms_translation.locales', $config['locales']);
 
