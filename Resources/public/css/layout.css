@@ -6,3 +6,15 @@ body > .container {
 	padding-top: 50px;
 	margin-top: -50px;
 }
+
+div.container table tbody tr td ul {
+    margin-bottom: 5px;
+}
+
+td pre {
+  margin-bottom: 5px;
+}
+
+div.containter {
+  width: 1200px;
+}
