@@ -15,6 +15,6 @@ td pre {
   margin-bottom: 5px;
 }
 
-div.containter {
-  width: 1200px;
+body > div.containter {
+  width: 1220px;
 }
