@@ -75,7 +75,7 @@ class FileSource implements SourceInterface
         $str = $this->path;
 
         if (null !== $this->line) {
-            $str .= ' on line '.$this->line;
+            $str .= ':' . $this->line;
 
             if (null !== $this->column) {
                 $str .= ' at column '.$this->column;
