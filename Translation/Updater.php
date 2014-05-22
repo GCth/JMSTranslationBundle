@@ -251,7 +251,7 @@ class Updater
                     if ($this->scannedCatalogue->has($message)) {
                         continue;
                     }
-
+                    $message->clearSources();
                     $this->scannedCatalogue->add($message);
                 }
             }

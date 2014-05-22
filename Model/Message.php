@@ -147,6 +147,11 @@ class Message
         return $this->sources;
     }
 
+    public function clearSources()
+    {
+        $this->sources = array();
+    }
+
     public function setMeaning($meaning)
     {
         $this->meaning = $meaning;
