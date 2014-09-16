@@ -63,11 +63,9 @@ class DefaultPhpFileExtractor implements LoggerAwareInterface, FileVisitorInterf
 
     public function enterNode(\PHPParser_Node $node)
     {
-
         if (!$node instanceof \PHPParser_Node_Expr_MethodCall
             || !is_string($node->name)
-            || ('trans' !== strtolower($node->name) && 'transchoice' !== strtolower($node->name))) {
-
+            || !in_array(strtolower($node->name), array('trans', 'transchoice', 'buildviolation', 'addflashmessage'))) {
             $this->previousNode = $node;
             return;
         }
@@ -93,17 +91,19 @@ class DefaultPhpFileExtractor implements LoggerAwareInterface, FileVisitorInterf
 
             $message = sprintf('Can only extract the translation id from a scalar string, but got "%s". Please refactor your code to make it extractable, or add the doc comment /** @Ignore */ to this code element (in %s on line %d).', get_class($node->args[0]->value), $this->file, $node->args[0]->value->getLine());
 
-            if ($this->logger) {
-                $this->logger->err($message);
-                return;
-            }
-
-            throw new RuntimeException($message);
+//            if ($this->logger) {
+//                $this->logger->err($message);
+//                return;
+//            }
+//
+//            throw new RuntimeException($message);
+            return;
         }
 
         $id = $node->args[0]->value->value;
 
         $index = 'trans' === strtolower($node->name) ? 2 : 3;
+
         if (isset($node->args[$index])) {
             if (!$node->args[$index]->value instanceof \PHPParser_Node_Scalar_String) {
                 if ($ignore) {
@@ -121,10 +121,11 @@ class DefaultPhpFileExtractor implements LoggerAwareInterface, FileVisitorInterf
             }
 
             $domain = $node->args[$index]->value->value;
+        } else if('buildViolation' === $node->name) {
+            $domain = 'validators';
         } else {
             $domain = 'messages';
         }
-
         $message = new Message($id, $domain);
         $message->setDesc($desc);
         $message->setMeaning($meaning);
