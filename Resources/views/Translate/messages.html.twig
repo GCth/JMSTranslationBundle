@@ -8,14 +8,14 @@
         </thead>
         <tbody>
             {% for id, message in messages %}
-            <tr>
-                <td>
+            <tr class="{% if message.sources|length == 0 %}unused{% endif %} {% if message.localeString == id %}untranslated{% endif %} ">
+                <td class="key">
                     <a class="jms-translation-anchor" id="{{ id }}" />
                     <p><abbr title="{{ id }}">{{ id|truncate(30) }}</abbr></p>
                 </td>
-                <td>
+                <td class="textarea">
                     <textarea data-id="{{ id }}" class="span8"{% if isWriteable is sameas(false) %} readonly="readonly"{% endif %}>{{ message.localeString }}</textarea></td>
-                <td>
+                <td class="description">
                     {% if message.meaning is not empty %}
                         <h6>Meaning</h6>
                         <p>{{ message.meaning }}</p>
@@ -24,7 +24,7 @@
                     {% if alternativeMessages[id] is defined %}
                         {% for locale, altMessage in alternativeMessages[id] %}
                         <p>
-                            <strong>{{ locale }}:</strong> <pre{% if message.sources|length == 0 %} class="unused"{% endif %}>{{ altMessage.localeString }}</pre>
+                            <strong>{{ locale }}:</strong> <pre>{{ altMessage.localeString }}</pre>
                         </p>
                         {% endfor %}
                     {% endif %}

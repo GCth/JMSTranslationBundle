@@ -22,9 +22,17 @@ td pre {
     padding: 3px 5px;
 }
 
-td pre.unused {
+tr.unused td pre {
   background: yellow;
   color: maroon;
+}
+
+tr.unused td.key {
+  background: yellow;
+}
+
+tr.untranslated td.textarea {
+  background: red;
 }
 
 div.container {
