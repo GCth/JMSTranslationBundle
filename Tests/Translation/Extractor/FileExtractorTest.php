@@ -18,7 +18,7 @@
 
 namespace JMS\TranslationBundle\Tests\Translation\Extractor;
 
-use Symfony\Component\HttpKernel\Log\NullLogger;
+use Psr\Log\NullLogger;
 use Doctrine\Common\Annotations\DocParser;
 use JMS\TranslationBundle\Translation\Extractor\File\FormExtractor;
 use Doctrine\Common\Annotations\AnnotationReader;
@@ -77,7 +77,7 @@ class FileExtractorTest extends \PHPUnit_Framework_TestCase
             $expected[$engine.'.foo_bar'] = $message;
         }
 
-        $actual = $this->extract(__DIR__.'/Fixture/SimpleTest/')->getDomain('messages')->all();
+        $actual = $this->extract(__DIR__.'/Fixture/SimpleTest')->getDomain('messages')->all();
 
         asort($expected);
         asort($actual);

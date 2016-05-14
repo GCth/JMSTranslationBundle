@@ -20,7 +20,7 @@
                         <h6>Meaning</h6>
                         <p>{{ message.meaning }}</p>
                     {% endif %}
-                
+
                     {% if alternativeMessages[id] is defined %}
                         {% for locale, altMessage in alternativeMessages[id] %}
                         <p>
@@ -28,16 +28,16 @@
                         </p>
                         {% endfor %}
                     {% endif %}
-                    
+
                     {% if message.sources|length > 0 %}
                         <ul>
                         {% for source in message.sources %}
-                            <li>{{ source }}</li>
+                            <li title="{{ source }}" class="jms-sources-list-item truncate-left">{{ source }}</li>
                         {% endfor %}
                         </ul>
                     {% endif %}
 
-                    {% if message.desc is not empty 
+                    {% if message.desc is not empty
                             and message.localeString != message.desc
                             and id != message.desc
                             and (alternativeMessages[id][sourceLanguage] is not defined

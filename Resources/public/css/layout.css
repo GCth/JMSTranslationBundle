@@ -3,11 +3,6 @@ body > .container {
     color: #111;
 }
 
-.jms-translation-anchor {
-    padding-top: 50px;
-    margin-top: -50px;
-}
-
 div.container table tbody tr td ul {
     margin-bottom: 2px;
     font-size: 10px;
@@ -39,3 +34,11 @@ div.container {
     width: 1220px;
 }
 
+.jms-translation-anchor {
+    padding-top: 50px;
+    margin-top: -50px;
+}
+
+.jms-sources-list-item {
+	word-break: break-all;
+}
