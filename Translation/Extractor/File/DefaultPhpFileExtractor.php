@@ -131,7 +131,6 @@ class DefaultPhpFileExtractor implements LoggerAwareInterface, FileVisitorInterf
 
             $message = sprintf('Can only extract the translation id from a scalar string, but got "%s". Please refactor your code to make it extractable, or add the doc comment /** @Ignore */ to this code element (in %s on line %d).', get_class($node->args[0]->value), $this->file, $node->args[0]->value->getLine());
 
-<<<<<<< HEAD
 //            if ($this->logger) {
 //                $this->logger->err($message);
 //                return;
@@ -139,14 +138,6 @@ class DefaultPhpFileExtractor implements LoggerAwareInterface, FileVisitorInterf
 //
 //            throw new RuntimeException($message);
             return;
-=======
-            if ($this->logger) {
-                $this->logger->error($message);
-                return;
-            }
-
-            throw new RuntimeException($message);
->>>>>>> 22e97a8f0b6a39d832a187b8704c727216de897b
         }
 
         $id = $node->args[0]->value->value;
