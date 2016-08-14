@@ -48,6 +48,7 @@ class DefaultPhpFileExtractor implements LoggerAwareInterface, FileVisitorInterf
      * @var FileSourceFactory
      */
     private $fileSourceFactory;
+
     /**
      * @var NodeTraverser
      */
@@ -79,6 +80,18 @@ class DefaultPhpFileExtractor implements LoggerAwareInterface, FileVisitorInterf
     private $previousNode;
 
     /**
+     * Methods and "domain" parameter offset to extract from PHP code
+     *
+     * @var array method => position of the "domain" parameter
+     */
+    protected $methodsToExtractFrom = array(
+        'trans' => 2,
+        'transchoice' => 3,
+        'addflashmessage' => 4,
+        'buildViolation' => 5,
+    );
+
+    /**
      * DefaultPhpFileExtractor constructor.
      * @param DocParser $docParser
      * @param FileSourceFactory $fileSourceFactory
@@ -105,10 +118,10 @@ class DefaultPhpFileExtractor implements LoggerAwareInterface, FileVisitorInterf
      */
     public function enterNode(Node $node)
     {
-        if (!$node instanceof \PHPParser_Node_Expr_MethodCall
-//        if (!$node instanceof Node\Expr\MethodCall
+//        if (!$node instanceof \PHPParser_Node_Expr_MethodCall
+        if (!$node instanceof Node\Expr\MethodCall
             || !is_string($node->name)
-            || !in_array(strtolower($node->name), array('trans', 'transchoice', 'buildviolation', 'addflashmessage'))) {
+            || !in_array(strtolower($node->name), array_map('strtolower', array_keys($this->methodsToExtractFrom)))) {
             $this->previousNode = $node;
             return;
         }
@@ -148,8 +161,7 @@ class DefaultPhpFileExtractor implements LoggerAwareInterface, FileVisitorInterf
 
         $id = $node->args[0]->value->value;
 
-        $index = 'trans' === strtolower($node->name) ? 2 : 3;
-
+        $index = $this->methodsToExtractFrom[strtolower($node->name)];
         if (isset($node->args[$index])) {
             if (!$node->args[$index]->value instanceof String_) {
                 if ($ignore) {
@@ -175,7 +187,7 @@ class DefaultPhpFileExtractor implements LoggerAwareInterface, FileVisitorInterf
         $message = new Message($id, $domain);
         $message->setDesc($desc);
         $message->setMeaning($meaning);
-        $message->addSource($this->fileSourceFactory->create((string) $this->file, $node->getLine()));
+        $message->addSource($this->fileSourceFactory->create($this->file, $node->getLine()));
         $this->catalogue->add($message);
     }
 

@@ -41,6 +41,7 @@ class FormExtractor implements FileVisitorInterface, LoggerAwareInterface, NodeV
      * @var FileSourceFactory
      */
     private $fileSourceFactory;
+
     /**
      * @var DocParser
      */
@@ -52,7 +53,7 @@ class FormExtractor implements FileVisitorInterface, LoggerAwareInterface, NodeV
     private $traverser;
 
     /**
-     * @var string
+     * @var \SplFileInfo
      */
     private $file;
 
@@ -172,6 +173,7 @@ class FormExtractor implements FileVisitorInterface, LoggerAwareInterface, NodeV
                 }
 
                 if ('help_block' !== $item->key->value && 'help_inline' !== $item->key->value && 'label' !== $item->key->value && 'empty_value' !== $item->key->value && 'choices' !== $item->key->value && 'invalid_message' !== $item->key->value && 'attr' !== $item->key->value ) {
+//                    echo "\n\n\n".$item->key->value; // die();
                     continue;
                 }
                 $domain = $item->value->value;
@@ -387,7 +389,7 @@ class FormExtractor implements FileVisitorInterface, LoggerAwareInterface, NodeV
             throw new RuntimeException($message);
         }
 
-        $source = $this->fileSourceFactory->create((string) $this->file, $item->value->getLine());
+        $source = $this->fileSourceFactory->create($this->file, $item->value->getLine());
         $id = $item->value->value;
 
         if (null === $domain) {

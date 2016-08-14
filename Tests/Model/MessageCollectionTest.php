@@ -141,7 +141,7 @@ class MessageCollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException RuntimeException
-     * @expectedExceptionMessage The message 'a' exists with two different descs: 'a' in foo on line 1, and 'b' in bar on line 2
+     * @expectedExceptionMessage The message 'a' exists with two different descs: 'a' in foo:1, and 'b' in bar:2
      */
     public function testAddChecksConsistency()
     {
@@ -205,7 +205,7 @@ class MessageCollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException RuntimeException
-     * @expectedExceptionMessage The message 'a' exists with two different descs: 'a' in foo on line 1, and 'b' in bar on line 2
+     * @expectedExceptionMessage The message 'a' exists with two different descs: 'a' in foo:1, and 'b' in bar:2
      */
     public function testSetChecksConsistency()
     {

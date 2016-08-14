@@ -29,6 +29,7 @@ class FileSourceFactory
 
     /**
      * FileSourceFactory constructor.
+     *
      * @param string $kernelRoot
      */
     public function __construct($kernelRoot)
@@ -37,19 +38,52 @@ class FileSourceFactory
     }
 
     /**
-     * Generate a new FileSource with a relative path
-     * @param          $path string
-     * @param null|int $line
-     * @param null|int $column
+     * Generate a new FileSource with a relative path.
+     *
+     * @param \SplFileInfo $file
+     * @param null|int     $line
+     * @param null|int     $column
+     *
      * @return FileSource
      */
-    public function create($path, $line = null, $column = null)
+    public function create(\SplFileInfo $file, $line = null, $column = null)
+    {
+        return new FileSource($this->getRelativePath((string) $file), $line, $column);
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return string
+     */
+    private function getRelativePath($path)
     {
         if (0 === strpos($path, $this->kernelRoot)) {
-            $path = substr($path, strlen($this->kernelRoot));
+            return substr($path, strlen($this->kernelRoot));
         }
-        $path = str_replace($this->kernelRoot, '', $path);
 
-        return new FileSource($path, $line, $column);
+        $relativePath = $ds = DIRECTORY_SEPARATOR;
+        $rootArray = explode($ds, $this->kernelRoot);
+        $pathArray = explode($ds, $path);
+
+        // Take the first directory in the kernelRoot tree
+        foreach ($rootArray as $rootCurrentDirectory) {
+            // Take the first directory from the path tree
+            $pathCurrentDirectory = array_shift($pathArray);
+
+            // If they are not equal
+            if ($pathCurrentDirectory !== $rootCurrentDirectory) {
+                // Prepend $relativePath with "/.."
+                $relativePath = $ds.'..'.$relativePath;
+
+                if ($pathCurrentDirectory) {
+                    // Append the current directory
+                    $relativePath .= $pathCurrentDirectory.$ds;
+                }
+            }
+        }
+
+        // Add the rest of the $pathArray on the relative directory
+        return rtrim($relativePath.implode($ds, $pathArray), '/');
     }
 }
