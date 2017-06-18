@@ -65,7 +65,10 @@
                 <argument>%jms_translation.source_language%</argument>
             </call>
             <call method="setAddDate">
-                <argument>%jms_translation.add_date%</argument>
+                <argument>%jms_translation.dumper.add_date%</argument>
+            </call>
+            <call method="setAddReference">
+                <argument>%jms_translation.dumper.add_references%</argument>
             </call>
             <tag name="jms_translation.dumper" format="xliff" />
         </service>
@@ -74,7 +77,10 @@
                 <argument>%jms_translation.source_language%</argument>
             </call>
             <call method="setAddDate">
-                <argument>%jms_translation.add_date%</argument>
+                <argument>%jms_translation.dumper.add_date%</argument>
+            </call>
+            <call method="setAddReference">
+                <argument>%jms_translation.dumper.add_references%</argument>
             </call>
             <tag name="jms_translation.dumper" format="xlf" />
         </service>
