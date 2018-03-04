@@ -8,7 +8,7 @@
         </thead>
         <tbody>
             {% for id, message in messages %}
-            <tr class="{% if message.sources|length == 0 %}unused{% endif %} {% if message.localeString == id %}untranslated{% endif %} ">
+            <tr class="messageRow{% if message.sources|length == 0 %}unused{% endif %} {% if message.localeString == id %}untranslated{% endif %} " id="row-{{ id }}">
                 <td class="key">
                     <a class="jms-translation-anchor" id="{{ id }}" />
                     <p><abbr title="{{ id }}">{{ id|truncate(30) }}</abbr></p>
