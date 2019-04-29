@@ -29,7 +29,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Translate Controller.
  *
- * @Route(service="jms_translation.controller.translate_controller")
+ * @Route()
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
 class TranslateController
