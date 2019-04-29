@@ -24,7 +24,6 @@ use JMS\TranslationBundle\Translation\Updater;
 use Symfony\Component\HttpFoundation\Response;
 use JMS\TranslationBundle\Util\FileUtils;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -60,8 +59,8 @@ class ApiController
      * @Route("/configs/{config}/domains/{domain}/locales/{locale}/messages",
      *            name="jms_translation_update_message",
      *            defaults = {"id" = null},
-     *            options = {"i18n" = false})
-     * @Method("PUT")
+     *            options = {"i18n" = false}
+     *            methods={"PUT"})
      * @param Request $request
      * @param string $config
      * @param string $domain
