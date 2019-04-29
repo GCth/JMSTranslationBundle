@@ -23,7 +23,7 @@ use JMS\TranslationBundle\Translation\ConfigFactory;
 use JMS\TranslationBundle\Translation\Updater;
 use Symfony\Component\HttpFoundation\Response;
 use JMS\TranslationBundle\Util\FileUtils;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 
