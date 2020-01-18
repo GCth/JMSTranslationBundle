@@ -128,6 +128,9 @@ class FormExtractor implements FileVisitorInterface, LoggerAwareInterface, NodeV
                     case 'label':
                         $this->parseItem($item, $domain);
                         break;
+                    case 'help':
+                        $this->parseItem($item, $domain);
+                        break;
                     case 'invalid_message':
                         $this->parseItem($item, 'validators');
                         break;
