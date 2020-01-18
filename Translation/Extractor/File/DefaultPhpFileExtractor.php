@@ -88,7 +88,7 @@ class DefaultPhpFileExtractor implements LoggerAwareInterface, FileVisitorInterf
         'trans' => 2,
         'transchoice' => 3,
         'addflashmessage' => 4,
-        'buildViolation' => 5,
+        'buildviolation' => 5,
     );
 
     /**
