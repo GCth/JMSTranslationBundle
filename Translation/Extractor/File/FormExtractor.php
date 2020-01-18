@@ -173,7 +173,7 @@ class FormExtractor implements FileVisitorInterface, LoggerAwareInterface, NodeV
                     continue;
                 }
 
-                if ('help_block' !== $item->key->value && 'help_inline' !== $item->key->value && 'label' !== $item->key->value && 'empty_value' !== $item->key->value && 'choices' !== $item->key->value && 'invalid_message' !== $item->key->value && 'attr' !== $item->key->value ) {
+                if ('help' !== $item->key->value && 'help_block' !== $item->key->value && 'help_inline' !== $item->key->value && 'label' !== $item->key->value && 'empty_value' !== $item->key->value && 'choices' !== $item->key->value && 'invalid_message' !== $item->key->value && 'attr' !== $item->key->value ) {
 //                    echo "\n\n\n".$item->key->value; // die();
                     continue;
                 }
